@@ -1,6 +1,24 @@
-FROM golang:1.18
+FROM golang:alpine AS builder
+
+LABEL stage=gobuilder
+
+ENV CGO_ENABLED 0
+
+RUN apk update --no-cache && apk add --no-cache tzdata
+
+WORKDIR /build
+
+ADD go.mod .
+ADD go.sum .
+RUN go mod download
+COPY . .
+RUN go build -ldflags="-s -w" -o /app/loadBalancer .
+
+
+FROM scratch
 
 WORKDIR /app
-COPY src go.mod main.go config.json ./
-RUN go build -o main .
-CMD ["/app/main", "-config", "config.json"]
+ADD config.json .
+COPY --from=builder /app/loadBalancer /app/loadBalancer
+
+CMD ["./loadBalancer", "-config", "config.json"]
