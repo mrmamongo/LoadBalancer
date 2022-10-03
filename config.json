@@ -1,0 +1,36 @@
+{
+  "port": 16560,
+  "host": "0.0.0.0",
+  "proxies": [
+    {
+      "index": "1",
+      "host": "http://localhost:25566",
+      "period": 2,
+      "timeout": 100
+    },
+    {
+      "index": "2",
+      "host": "http://localhost:25567",
+      "period": 2,
+      "timeout": 100
+    },
+    {
+      "index": "3",
+      "host": "http://localhost:25568",
+      "period": 2,
+      "timeout": 100
+    },
+    {
+      "index": "4",
+      "host": "http://localhost:25569",
+      "period": 2,
+      "timeout": 100
+    },
+    {
+      "index": "5",
+      "host": "http://localhost:25570",
+      "period": 2,
+      "timeout": 100
+    }
+  ]
+}

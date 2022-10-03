@@ -1,0 +1,5 @@
+services:
+  balancer:
+    build: ./balancer
+    ports:
+      - "80:80"
