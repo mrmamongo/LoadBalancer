@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-type ProxyHealth struct {
+type Health struct {
 	origin *url.URL
 
 	mutex         sync.Mutex
@@ -17,8 +17,8 @@ type ProxyHealth struct {
 	timeoutPeriod time.Duration
 }
 
-func NewProxyHealth(origin *url.URL, period, timeoutPeriod time.Duration) *ProxyHealth {
-	h := &ProxyHealth{
+func NewProxyHealth(origin *url.URL, period, timeoutPeriod time.Duration) *Health {
+	h := &Health{
 		origin:        origin,
 		period:        period,
 		cancel:        make(chan struct{}),
@@ -29,7 +29,7 @@ func NewProxyHealth(origin *url.URL, period, timeoutPeriod time.Duration) *Proxy
 	return h
 }
 
-func (h *ProxyHealth) Start() {
+func (h *Health) Start() {
 	go func() {
 		t := time.NewTicker(h.period)
 		for {
@@ -54,7 +54,7 @@ func checkHealth(origin *url.URL, period time.Duration) bool {
 	return true
 }
 
-func (h *ProxyHealth) IsAvailable() bool {
+func (h *Health) IsAvailable() bool {
 	h.mutex.Lock()
 	defer h.mutex.Unlock()
 	return h.isAvailable

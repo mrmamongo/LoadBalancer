@@ -9,7 +9,7 @@ import (
 )
 
 type Proxy struct {
-	health *ProxyHealth
+	health *Health
 
 	load  int32
 	proxy *httputil.ReverseProxy

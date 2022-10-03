@@ -2,7 +2,7 @@ package balancer
 
 import (
 	"fmt"
-	"loadBalancer/internal/app/proxy"
+	"github.com/mrmamongo/LoadBalancer/internal/app/proxy"
 	"net/http"
 	"sort"
 )
